@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --primary: #2dd4bf; /* Teal */
+    --primary-glow: rgba(45, 212, 191, 0.4);
+    --secondary: #f472b6; /* Pink */
+    --accent: #6366f1; /* Indigo */
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shine: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Background Image with Overlay */
+.bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: url('design_oasis_bg_1772019346993.png') center/cover no-repeat;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+    backdrop-filter: blur(2px);
+}
+
+header {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    animation: fadeInDown 1s ease-out;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #fff, var(--primary), #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 600px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: -50px auto 100px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--glass-shine), transparent);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--primary-glow);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.card h2 .icon {
+    font-size: 1.8rem;
+}
+
+ul {
+    list-style: none;
+    position: relative;
+    z-index: 1;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+.resource-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.resource-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.resource-link .name-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-link .name {
+    font-size: 1.05rem;
+}
+
+.resource-link .badge {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.resource-link .arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    color: var(--primary);
+}
+
+.resource-link:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Animations */
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    header { height: 35vh; }
+    .main-container { margin-top: 0; }
+}
